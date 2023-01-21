@@ -134,13 +134,13 @@ public class App extends Application {
         GridPane.setConstraints(compyCardFive, 4, 0);
         GridPane.setHalignment(compyCardFive, HPos.CENTER);
 
-        packLabel = new Button("Cards:\n47");
+        packLabel = new Button("Cards:\n40");
         packLabel.setId("card");
         packLabel.setMinWidth(100);
         packLabel.setMinHeight(150);
         packLabel.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(packLabel, 0, 1);
-        GridPane.setHalignment(packLabel, HPos.CENTER);
+        // GridPane.setHalignment(packLabel, HPos.CENTER);
 
         cardPileLabel = new Button("Ace\nSpades");
         cardPileLabel.setId("card");
@@ -148,7 +148,7 @@ public class App extends Application {
         cardPileLabel.setMinHeight(150);
         cardPileLabel.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(cardPileLabel, 1, 1);
-        GridPane.setHalignment(cardPileLabel, HPos.CENTER);
+        // GridPane.setHalignment(cardPileLabel, HPos.CENTER);
 
         playerCardOne = new Button("Card\nOne");
         playerCardOne.setId("card");
@@ -194,7 +194,8 @@ public class App extends Application {
         newGameButton.setId("newgame");
         newGameButton.setMinWidth(100);
         newGameButton.setTextAlignment(TextAlignment.CENTER);
-        newGameButton.setAlignment(Pos.BASELINE_CENTER);
+        // newGameButton.setAlignment(Pos.BASELINE_CENTER);
+        newGameButton.setId("scorelabel");
         GridPane.setConstraints(newGameButton, 0, 0);
         GridPane.setHalignment(newGameButton, HPos.CENTER);
 
@@ -315,6 +316,8 @@ public class App extends Application {
     }
 
     public void StartNewGame(){
+        disableCards(false);
+        resetScores();
         game.initialiseGame();
         setCardInPlay();
         setPlayerHand();
@@ -331,7 +334,11 @@ public class App extends Application {
     }
 
     public void setRemainingCards(){
-        packLabel.setText("" + game.getDeckSize() + "\nRemaining");
+        int packLeft = game.getDeckSize() -1;
+        packLabel.setText("" + packLeft + "\nRemaining");
+        if (packLeft == 0){
+            gameOver();
+        }
     }
 
     public void setPlayerHand(){
@@ -342,6 +349,7 @@ public class App extends Application {
         playerCardThree.setText("" + hand.get(2));
         playerCardFour.setText("" + hand.get(3));
         playerCardFive.setText("" + hand.get(4));
+        colourCard();
     }
 
     public void playCompyCard(){
@@ -350,6 +358,7 @@ public class App extends Application {
         compyPointsScored.setText("" + cardScore);
         setCardInPlay();
         setRemainingCards();
+        colourCard();
     }
 
     public static void delay(long millis, Runnable continuation) {
@@ -365,6 +374,73 @@ public class App extends Application {
         new Thread(sleeper).start();
       }
 
+      public void disableCards(boolean toggle){
+            playerCardOne.setDisable(toggle);
+            playerCardTwo.setDisable(toggle);
+            playerCardThree.setDisable(toggle);
+            playerCardFour.setDisable(toggle);
+            playerCardFive.setDisable(toggle);
+        
+      }
+
+      public void gameOver(){
+        disableCards(true);
+        String message;
+        if (game.getPlayerTotal() == game.getCompyTotal()){
+            message = "Draw";
+        } else if (game.getPlayerTotal() > game.getCompyTotal()){
+            message = "You Win!";
+        } else {
+            message = "You Lose!";
+        }
+        packLabel.setText("Game Over\n" + message);
+      }
+
+      public void resetScores(){
+        compyPointsScored.setText("0");
+        compyTotalPoints.setText("0");
+        playerPointsScored.setText("0");
+        playerTotalPoints.setText("0");
+      }
+
+      public void colourCard(){
+        List<Card> hand = game.getCurrentPlayerHand();
+        if (hand.get(0).getCardType() == Card.CardType.HEARTS | hand.get(0).getCardType() == Card.CardType.DIAMONDS){
+            playerCardOne.setStyle("-fx-text-fill: red");
+        } else {
+            playerCardOne.setStyle("-fx-text-fill: black");
+        }
+
+        if (hand.get(1).getCardType() == Card.CardType.HEARTS | hand.get(1).getCardType() == Card.CardType.DIAMONDS){
+            playerCardTwo.setStyle("-fx-text-fill: red");
+        } else {
+            playerCardTwo.setStyle("-fx-text-fill: black");
+        }
+
+        if (hand.get(2).getCardType() == Card.CardType.HEARTS | hand.get(2).getCardType() == Card.CardType.DIAMONDS){
+            playerCardThree.setStyle("-fx-text-fill: red");
+        } else {
+            playerCardThree.setStyle("-fx-text-fill: black");
+        }
+
+        if (hand.get(3).getCardType() == Card.CardType.HEARTS | hand.get(3).getCardType() == Card.CardType.DIAMONDS){
+            playerCardFour.setStyle("-fx-text-fill: red");
+        } else {
+            playerCardFour.setStyle("-fx-text-fill: black");
+        }
+
+        if (hand.get(4).getCardType() == Card.CardType.HEARTS | hand.get(4).getCardType() == Card.CardType.DIAMONDS){
+            playerCardFive.setStyle("-fx-text-fill: red");
+        } else {
+            playerCardFive.setStyle("-fx-text-fill: black");
+        }
+
+        if (game.getCardInPlay().getCardType() == Card.CardType.HEARTS | game.getCardInPlay().getCardType() == Card.CardType.DIAMONDS){
+            cardPileLabel.setStyle("-fx-text-fill: red");
+        } else {
+            cardPileLabel.setStyle("-fx-text-fill: black");
+        }
+      }
 }
 
 

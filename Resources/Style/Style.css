@@ -1,4 +1,19 @@
 .root {
     -fx-font-size: 10pt;
     -fx-background-color: DarkGreen;
+    -fx-text-fill: black
   }
+
+  #card{
+    -fx-font-weight: bold;
+    -fx-font-size: 11pt;
+    -fx-effect: dropshadow(three-pass-box, rgb(12, 1, 1), 10, 0, 0, 5);
+    -fx-text-fill: black
+  }
+
+  #scorelabel{
+    -fx-font-weight: bold;
+    -fx-font-size: 11pt;
+    -fx-effect: dropshadow(three-pass-box, rgb(12, 1, 1), 10, 0, 0, 5);
+  }
+  

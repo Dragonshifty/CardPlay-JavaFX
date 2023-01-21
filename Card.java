@@ -18,7 +18,7 @@ public class Card implements Comparable<Card> {
         }
     }
 
-    public enum CardType{
+    public static enum CardType{
         DIAMONDS, HEARTS, CLUBS, SPADES;
     }
 
