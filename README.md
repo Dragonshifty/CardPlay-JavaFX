@@ -9,3 +9,4 @@ Features and patch notes:
 - Javafx and sound
 - Exploring data structures
 - Simple game theory
+- Opponent A.I.
