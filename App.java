@@ -297,10 +297,10 @@ public class App extends Application {
         });
 
         newGameButton.setOnAction(e -> {
-            StartNewGame();
+            startNewGame();
         });
 
-        StartNewGame();
+        startNewGame();
         
         BorderPane pane = new BorderPane();
         pane.setTop(gridTop);
@@ -315,7 +315,7 @@ public class App extends Application {
         window.show();
     }
 
-    public void StartNewGame(){
+    public void startNewGame(){
         disableCards(false);
         resetScores();
         game.initialiseGame();
