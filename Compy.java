@@ -26,14 +26,12 @@ public class Compy {
     public int[] possibleScores(){
         // Return array with compy card played index and card score
         int[] returnInfo = new int[3];
-
         int[] scoreTemp = new int[5];
         int highLowDraw;
         int differenceScore = 0;
         boolean checkSuit = false;
         int index = 0;
         
-
         for (int i = 0; i < compyHand.size(); i++){
             highLowDraw = compyHand.get(i).compareTo(cardInPlay);
             switch (highLowDraw){
@@ -62,13 +60,11 @@ public class Compy {
         }
         int max = scoreTemp[0];
         for (int i = 0; i < scoreTemp.length; i++){
-            // System.out.println(scoreTemp[i]);
             if (max < scoreTemp[i]){
                 max = scoreTemp[i];
                 index = i;
             }
         }
-        // System.out.println("Computer card played: " + compyHand.get(index) + "\n");
 
         returnInfo[0] = index;
         returnInfo[1] = scoreTemp[index];

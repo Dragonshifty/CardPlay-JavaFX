@@ -6,8 +6,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.geometry.*;
 import javafx.concurrent.Task;
-
-
+import javafx.scene.media.AudioClip;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +34,13 @@ public class App extends Application {
     Button compyPointsScored;
     Button playerPointsScored;
 
+    AudioClip shuffleSound;
+    AudioClip dealSound;
+    AudioClip playerCardSound;
+    AudioClip compyCardSound;
+    AudioClip winSound;
+    AudioClip loseSound;
+
     Game game = new Game();
 
     Stage window;
@@ -49,6 +55,7 @@ public class App extends Application {
         window = primaryStage;
         window.setTitle("CardPlay");
 
+        // Set Grid
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         GridPane gridTop = new GridPane();
@@ -85,90 +92,75 @@ public class App extends Application {
         gridRight.setPadding(new Insets(10, 10, 10, 10));
         gridRight.setVgap(10);
         gridRight.setHgap(10);
-        // vBoxLeft.setPadding(new Insets(10, 10, 10, 10));
-        // vBoxLeft.setAlignment(Pos.CENTER);
-        // vBoxLeft.setVgap(10);
-        // vBoxLeft.setHgap(10);
 
-        // vBoxRight.setPadding(new Insets(10, 10, 10, 10));
-        // gridRight.setVgap(10);
-        // gridRight.setHgap(10);
         
+        // Set Buttons and Labels
         compyCardOne = new Button("Card\nOne");
         compyCardOne.setId("card");
-        compyCardOne.setMinWidth(100);
+        compyCardOne.setMinWidth(104);
         compyCardOne.setMinHeight(150);
         compyCardOne.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardOne, 0, 0);
-        GridPane.setHalignment(compyCardOne, HPos.CENTER);
 
         compyCardTwo = new Button("Card\nTwo");
         compyCardTwo.setId("card");
-        compyCardTwo.setMinWidth(100);
+        compyCardTwo.setMinWidth(104);
         compyCardTwo.setMinHeight(150);
         compyCardTwo.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardTwo, 1, 0);
-        GridPane.setHalignment(compyCardTwo, HPos.CENTER);
 
         compyCardThree = new Button("Card\nThree");
         compyCardThree.setId("card");
-        compyCardThree.setMinWidth(100);
+        compyCardThree.setMinWidth(104);
         compyCardThree.setMinHeight(150);
         compyCardThree.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardThree, 2, 0);
-        GridPane.setHalignment(compyCardThree, HPos.CENTER);
 
         compyCardFour = new Button("Card\nFour");
         compyCardFour.setId("card");
-        compyCardFour.setMinWidth(100);
+        compyCardFour.setMinWidth(104);
         compyCardFour.setMinHeight(150);
         compyCardFour.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardFour, 3, 0);
-        GridPane.setHalignment(compyCardFour, HPos.CENTER);
 
         compyCardFive = new Button("Card\nFive");
         compyCardFive.setId("card");
-        compyCardFive.setMinWidth(100);
+        compyCardFive.setMinWidth(104);
         compyCardFive.setMinHeight(150);
         compyCardFive.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardFive, 4, 0);
-        GridPane.setHalignment(compyCardFive, HPos.CENTER);
 
         packLabel = new Button("Cards:\n40");
         packLabel.setId("card");
-        packLabel.setMinWidth(100);
+        packLabel.setMinWidth(104);
         packLabel.setMinHeight(150);
         packLabel.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(packLabel, 0, 1);
-        // GridPane.setHalignment(packLabel, HPos.CENTER);
 
         cardPileLabel = new Button("Ace\nSpades");
         cardPileLabel.setId("card");
-        cardPileLabel.setMinWidth(100);
+        cardPileLabel.setMinWidth(104);
         cardPileLabel.setMinHeight(150);
         cardPileLabel.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(cardPileLabel, 1, 1);
-        // GridPane.setHalignment(cardPileLabel, HPos.CENTER);
 
         playerCardOne = new Button("Card\nOne");
         playerCardOne.setId("card");
-        playerCardOne.setMinWidth(100);
+        playerCardOne.setMinWidth(104);
         playerCardOne.setMinHeight(150);
         playerCardOne.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardOne, 0, 2);
-        GridPane.setHalignment(playerCardOne, HPos.CENTER);
 
         playerCardTwo = new Button("Card\nTwo");
         playerCardTwo.setId("card");
-        playerCardTwo.setMinWidth(100);
+        playerCardTwo.setMinWidth(104);
         playerCardTwo.setMinHeight(150);
         playerCardTwo.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardTwo, 1, 2);
-        GridPane.setHalignment(playerCardTwo, HPos.CENTER);
 
         playerCardThree = new Button("Card\nThree");
         playerCardThree.setId("card");
-        playerCardThree.setMinWidth(100);
+        playerCardThree.setMinWidth(104);
         playerCardThree.setMinHeight(150);
         playerCardThree.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardThree, 2, 2);
@@ -176,61 +168,71 @@ public class App extends Application {
         
         playerCardFour = new Button("Card\nFour");
         playerCardFour.setId("card");
-        playerCardFour.setMinWidth(100);
+        playerCardFour.setMinWidth(104);
         playerCardFour.setMinHeight(150);
         playerCardFour.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardFour, 3, 2);
-        GridPane.setHalignment(playerCardFour, HPos.CENTER);
         
         playerCardFive = new Button("Card\nFive");
         playerCardFive.setId("card");
-        playerCardFive.setMinWidth(100);
+        playerCardFive.setMinWidth(104);
         playerCardFive.setMinHeight(150);
         playerCardFive.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardFive, 4, 2);
-        GridPane.setHalignment(playerCardFive, HPos.CENTER);
 
         newGameButton = new Button("New Game");
         newGameButton.setId("newgame");
         newGameButton.setMinWidth(100);
         newGameButton.setTextAlignment(TextAlignment.CENTER);
-        // newGameButton.setAlignment(Pos.BASELINE_CENTER);
         newGameButton.setId("scorelabel");
         GridPane.setConstraints(newGameButton, 0, 0);
-        GridPane.setHalignment(newGameButton, HPos.CENTER);
 
-        playerTotalPoints = new Button("Player Total:\n0");
+        playerTotalPoints = new Button("0");
         playerTotalPoints.setId("scorelabel");
         playerTotalPoints.setMinWidth(100);
         playerTotalPoints.setTextAlignment(TextAlignment.CENTER);
         playerTotalPoints.setAlignment(Pos.BASELINE_CENTER);
         GridPane.setConstraints(playerTotalPoints, 0, 1);
-        GridPane.setHalignment(playerTotalPoints, HPos.CENTER);
 
-        playerPointsScored = new Button("Last Points:\n0");
+        Label playerTotalLabel = new Label("Player Total");
+        playerTotalLabel.setMinWidth(100);
+        playerTotalLabel.setTextAlignment(TextAlignment.LEFT);
+        GridPane.setConstraints(playerTotalLabel, 1, 1);
+
+        playerPointsScored = new Button("0");
         playerPointsScored.setId("scorelabel");
         playerPointsScored.setMinWidth(100);
         playerPointsScored.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerPointsScored, 0, 2);
-        GridPane.setHalignment(playerPointsScored, HPos.CENTER);
 
-        compyTotalPoints = new Button("Compy Total:\n0");
+        Label playerLastPointsLabel = new Label("Last Points Scored");
+        playerLastPointsLabel.setMinWidth(100);
+        playerLastPointsLabel.setTextAlignment(TextAlignment.LEFT);
+        GridPane.setConstraints(playerLastPointsLabel, 1, 2);
+
+        Label compyTotalLabel = new Label("Computer Total");
+        compyTotalLabel.setMinWidth(100);
+        compyTotalLabel.setTextAlignment(TextAlignment.RIGHT);
+        GridPane.setHalignment(compyTotalLabel, HPos.RIGHT);
+        GridPane.setValignment(compyTotalLabel, VPos.CENTER);
+        GridPane.setConstraints(compyTotalLabel, 0, 0);
+
+        compyTotalPoints = new Button("0");
         compyTotalPoints.setId("scorelabel");
         compyTotalPoints.setMinWidth(100);
         compyTotalPoints.setTextAlignment(TextAlignment.CENTER);
-        GridPane.setConstraints(compyTotalPoints, 0, 0);
-        GridPane.setHalignment(compyTotalPoints, HPos.CENTER);
+        GridPane.setConstraints(compyTotalPoints, 1, 0);
 
-        compyPointsScored = new Button("Last Points:\n0");
+        Label compyLastPointsLabel = new Label("Last Points Scored");
+        compyLastPointsLabel.setMinWidth(100);
+        compyLastPointsLabel.setTextAlignment(TextAlignment.RIGHT);
+        GridPane.setConstraints(compyLastPointsLabel, 0, 1);
+
+        compyPointsScored = new Button("0");
         compyPointsScored.setId("scorelabel");
         compyPointsScored.setMinWidth(100);
         compyPointsScored.setTextAlignment(TextAlignment.CENTER);
-        GridPane.setConstraints(compyPointsScored, 0, 1);
-        GridPane.setHalignment(compyPointsScored, HPos.CENTER);
-
-        // grid.getChildren().addAll(compyCardOne, compyCardTwo, compyCardThree, compyCardFour,
-        // compyCardFive, packLabel, cardPileLabel, playerCardOne, playerCardTwo, playerCardThree,
-        // playerCardFour, playerCardFive);
+        GridPane.setConstraints(compyPointsScored, 1, 1);
 
         gridTop.getChildren().addAll(compyCardOne, compyCardTwo, compyCardThree, compyCardFour,
         compyCardFive);
@@ -240,18 +242,30 @@ public class App extends Application {
         gridBottom.getChildren().addAll(playerCardOne, playerCardTwo, playerCardThree,
         playerCardFour, playerCardFive);
 
-        gridLeft.getChildren().addAll(newGameButton, playerTotalPoints, playerPointsScored);
+        gridLeft.getChildren().addAll(newGameButton, playerTotalPoints, playerPointsScored, playerTotalLabel, playerLastPointsLabel);
 
-        gridRight.getChildren().addAll(compyTotalPoints, compyPointsScored);
+        gridRight.getChildren().addAll(compyTotalPoints, compyPointsScored, compyTotalLabel, compyLastPointsLabel);
         
+        // Load sounds
+        try {
+            dealSound = new AudioClip(getClass().getResource("/Resources/Audio/deal.mp3").toExternalForm());
+            shuffleSound = new AudioClip(getClass().getResource("/Resources/Audio/shuffle.mp3").toExternalForm());
+            playerCardSound = new AudioClip(getClass().getResource("/Resources/Audio/single.mp3").toExternalForm());
+            compyCardSound = new AudioClip(getClass().getResource("/Resources/Audio/single2.mp3").toExternalForm());
+            winSound = new AudioClip(getClass().getResource("/Resources/Audio/win.wav").toExternalForm());
+            loseSound = new AudioClip(getClass().getResource("/Resources/Audio/lose.mp3").toExternalForm());
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
         
+        // Player action card lambdas
         playerCardOne.setOnAction(e -> {
             int cardScore = game.playPlayerCard(0);
             setCardInPlay();
-            setPlayerHand();
-            
+            setPlayerHand();          
             showTotalPoints();
             playerPointsScored.setText("" + cardScore);
+            playPlayerCardSound();
             delay(1500, () -> playCompyCard());
             
         });
@@ -260,9 +274,9 @@ public class App extends Application {
             int cardScore = game.playPlayerCard(1);
             setCardInPlay();
             setPlayerHand();
-            // setRemainingCards();
             showTotalPoints();
             playerPointsScored.setText("" + cardScore);
+            playPlayerCardSound();
             delay(1500, () -> playCompyCard());
         });
 
@@ -270,9 +284,9 @@ public class App extends Application {
             int cardScore = game.playPlayerCard(2);
             setCardInPlay();
             setPlayerHand();
-            // setRemainingCards();
             showTotalPoints();
             playerPointsScored.setText("" + cardScore);
+            playPlayerCardSound();
             delay(1500, () -> playCompyCard());
         });
 
@@ -280,9 +294,9 @@ public class App extends Application {
             int cardScore = game.playPlayerCard(3);
             setCardInPlay();
             setPlayerHand();
-            // setRemainingCards();
             showTotalPoints();
             playerPointsScored.setText("" + cardScore);
+            playPlayerCardSound();
             delay(1500, () -> playCompyCard());
         });
 
@@ -290,9 +304,9 @@ public class App extends Application {
             int cardScore = game.playPlayerCard(4);
             setCardInPlay();
             setPlayerHand();
-            // setRemainingCards();
             showTotalPoints();
             playerPointsScored.setText("" + cardScore);
+            playPlayerCardSound();
             delay(1500, () -> playCompyCard());
         });
 
@@ -300,8 +314,7 @@ public class App extends Application {
             startNewGame();
         });
 
-        startNewGame();
-        
+        // Finalise GUI
         BorderPane pane = new BorderPane();
         pane.setTop(gridTop);
         pane.setCenter(grid);
@@ -313,6 +326,9 @@ public class App extends Application {
         scene.getStylesheets().add("/Resources/Style/Style.css"); 
         window.setScene(scene);
         window.show();
+
+        // Start Initial Game
+        startNewGame();
     }
 
     public void startNewGame(){
@@ -321,7 +337,10 @@ public class App extends Application {
         game.initialiseGame();
         setCardInPlay();
         setPlayerHand();
+        colourCompyCard();
         setRemainingCards();
+        playShuffleSound();
+        delay(1000, () -> playDealSound());        
     }
 
     public void showTotalPoints(){
@@ -359,8 +378,114 @@ public class App extends Application {
         setCardInPlay();
         setRemainingCards();
         colourCard();
+        playCompyCardSound();
+        colourCompyCard();
     }
 
+    public void disableCards(boolean toggle){
+        playerCardOne.setDisable(toggle);
+        playerCardTwo.setDisable(toggle);
+        playerCardThree.setDisable(toggle);
+        playerCardFour.setDisable(toggle);
+        playerCardFive.setDisable(toggle);
+    }
+
+    public void gameOver(){
+    disableCards(true);
+    String message;
+    if (game.getPlayerTotal() == game.getCompyTotal()){
+        message = "Draw";
+        playWinSound();
+    } else if (game.getPlayerTotal() > game.getCompyTotal()){
+        message = "You Win!";
+        playWinSound();
+    } else {
+        message = "You Lose!";
+        playLoseSound();
+    }
+    packLabel.setText("Game Over\n" + message);
+    }
+
+    public void resetScores(){
+    compyPointsScored.setText("0");
+    compyTotalPoints.setText("0");
+    playerPointsScored.setText("0");
+    playerTotalPoints.setText("0");
+    }
+
+    public void colourCard(){
+        List<Card> hand = game.getCurrentPlayerHand();
+        if (hand.get(0).getCardType() == Card.CardType.HEARTS | hand.get(0).getCardType() == Card.CardType.DIAMONDS){
+                playerCardOne.setStyle("-fx-text-fill: red");
+            } else {
+                playerCardOne.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(1).getCardType() == Card.CardType.HEARTS | hand.get(1).getCardType() == Card.CardType.DIAMONDS){
+                playerCardTwo.setStyle("-fx-text-fill: red");
+            } else {
+                playerCardTwo.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(2).getCardType() == Card.CardType.HEARTS | hand.get(2).getCardType() == Card.CardType.DIAMONDS){
+                playerCardThree.setStyle("-fx-text-fill: red");
+            } else {
+                playerCardThree.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(3).getCardType() == Card.CardType.HEARTS | hand.get(3).getCardType() == Card.CardType.DIAMONDS){
+                playerCardFour.setStyle("-fx-text-fill: red");
+            } else {
+                playerCardFour.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(4).getCardType() == Card.CardType.HEARTS | hand.get(4).getCardType() == Card.CardType.DIAMONDS){
+                playerCardFive.setStyle("-fx-text-fill: red");
+            } else {
+                playerCardFive.setStyle("-fx-text-fill: black");
+            }
+
+        if (game.getCardInPlay().getCardType() == Card.CardType.HEARTS | game.getCardInPlay().getCardType() == Card.CardType.DIAMONDS){
+                cardPileLabel.setStyle("-fx-text-fill: red");
+            } else {
+                cardPileLabel.setStyle("-fx-text-fill: black");
+            }
+    }
+
+    public void colourCompyCard(){
+        List<Card> hand = game.getCurrentCompyHand();
+        if (hand.get(0).getCardType() == Card.CardType.HEARTS | hand.get(0).getCardType() == Card.CardType.DIAMONDS){
+                compyCardOne.setStyle("-fx-text-fill: red");
+            } else {
+                compyCardOne.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(1).getCardType() == Card.CardType.HEARTS | hand.get(1).getCardType() == Card.CardType.DIAMONDS){
+                compyCardTwo.setStyle("-fx-text-fill: red");
+            } else {
+                compyCardTwo.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(2).getCardType() == Card.CardType.HEARTS | hand.get(2).getCardType() == Card.CardType.DIAMONDS){
+                compyCardThree.setStyle("-fx-text-fill: red");
+            } else {
+                compyCardThree.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(3).getCardType() == Card.CardType.HEARTS | hand.get(3).getCardType() == Card.CardType.DIAMONDS){
+                compyCardFour.setStyle("-fx-text-fill: red");
+            } else {
+                compyCardFour.setStyle("-fx-text-fill: black");
+            }
+
+        if (hand.get(4).getCardType() == Card.CardType.HEARTS | hand.get(4).getCardType() == Card.CardType.DIAMONDS){
+                compyCardFive.setStyle("-fx-text-fill: red");
+            } else {
+                compyCardFive.setStyle("-fx-text-fill: black");
+            }
+    }
+
+    // Delay Method
     public static void delay(long millis, Runnable continuation) {
         Task<Void> sleeper = new Task<Void>() {
             @Override
@@ -372,75 +497,56 @@ public class App extends Application {
         };
         sleeper.setOnSucceeded(event -> continuation.run());
         new Thread(sleeper).start();
-      }
+    }
 
-      public void disableCards(boolean toggle){
-            playerCardOne.setDisable(toggle);
-            playerCardTwo.setDisable(toggle);
-            playerCardThree.setDisable(toggle);
-            playerCardFour.setDisable(toggle);
-            playerCardFive.setDisable(toggle);
-        
-      }
-
-      public void gameOver(){
-        disableCards(true);
-        String message;
-        if (game.getPlayerTotal() == game.getCompyTotal()){
-            message = "Draw";
-        } else if (game.getPlayerTotal() > game.getCompyTotal()){
-            message = "You Win!";
-        } else {
-            message = "You Lose!";
-        }
-        packLabel.setText("Game Over\n" + message);
-      }
-
-      public void resetScores(){
-        compyPointsScored.setText("0");
-        compyTotalPoints.setText("0");
-        playerPointsScored.setText("0");
-        playerTotalPoints.setText("0");
-      }
-
-      public void colourCard(){
-        List<Card> hand = game.getCurrentPlayerHand();
-        if (hand.get(0).getCardType() == Card.CardType.HEARTS | hand.get(0).getCardType() == Card.CardType.DIAMONDS){
-            playerCardOne.setStyle("-fx-text-fill: red");
-        } else {
-            playerCardOne.setStyle("-fx-text-fill: black");
+    // Sound Methods
+    void playShuffleSound(){
+        try {
+            shuffleSound.play();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
 
-        if (hand.get(1).getCardType() == Card.CardType.HEARTS | hand.get(1).getCardType() == Card.CardType.DIAMONDS){
-            playerCardTwo.setStyle("-fx-text-fill: red");
-        } else {
-            playerCardTwo.setStyle("-fx-text-fill: black");
+    void playDealSound(){
+        try {
+            dealSound.play();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
 
-        if (hand.get(2).getCardType() == Card.CardType.HEARTS | hand.get(2).getCardType() == Card.CardType.DIAMONDS){
-            playerCardThree.setStyle("-fx-text-fill: red");
-        } else {
-            playerCardThree.setStyle("-fx-text-fill: black");
+    void playPlayerCardSound(){
+        try {
+            playerCardSound.play();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
+    }
 
-        if (hand.get(3).getCardType() == Card.CardType.HEARTS | hand.get(3).getCardType() == Card.CardType.DIAMONDS){
-            playerCardFour.setStyle("-fx-text-fill: red");
-        } else {
-            playerCardFour.setStyle("-fx-text-fill: black");
+    void playCompyCardSound(){
+        try {
+            compyCardSound.play();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
+    }
 
-        if (hand.get(4).getCardType() == Card.CardType.HEARTS | hand.get(4).getCardType() == Card.CardType.DIAMONDS){
-            playerCardFive.setStyle("-fx-text-fill: red");
-        } else {
-            playerCardFive.setStyle("-fx-text-fill: black");
+    void playWinSound(){
+        try {
+            winSound.play();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
+    }
 
-        if (game.getCardInPlay().getCardType() == Card.CardType.HEARTS | game.getCardInPlay().getCardType() == Card.CardType.DIAMONDS){
-            cardPileLabel.setStyle("-fx-text-fill: red");
-        } else {
-            cardPileLabel.setStyle("-fx-text-fill: black");
+    void playLoseSound(){
+        try {
+            loseSound.play();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
-      }
+    }
 }
 
 
