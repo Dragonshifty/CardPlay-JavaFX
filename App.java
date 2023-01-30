@@ -18,9 +18,10 @@ public class App extends Application {
     Button compyCardFour;
     Button compyCardFive;
 
+    List<Button> compyButtons = new ArrayList<>();
+
     Button packLabel;
     Button cardPileLabel;
-
     Button newGameButton;
 
     Button playerCardOne;
@@ -29,10 +30,14 @@ public class App extends Application {
     Button playerCardFour;
     Button playerCardFive;
 
+    List<Button> playerButtons = new ArrayList<>();
+
     Button compyTotalPoints;
     Button playerTotalPoints;
     Button compyPointsScored;
     Button playerPointsScored;
+
+    List<Button> scoreButtons = new ArrayList<>();
 
     AudioClip shuffleSound;
     AudioClip dealSound;
@@ -95,103 +100,90 @@ public class App extends Application {
 
         
         // Set Buttons and Labels
+        // Initialise computer buttons
         compyCardOne = new Button("Card\nOne");
-        compyCardOne.setId("card");
-        compyCardOne.setMinWidth(104);
-        compyCardOne.setMinHeight(150);
-        compyCardOne.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardOne, 0, 0);
 
         compyCardTwo = new Button("Card\nTwo");
-        compyCardTwo.setId("card");
-        compyCardTwo.setMinWidth(104);
-        compyCardTwo.setMinHeight(150);
-        compyCardTwo.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardTwo, 1, 0);
 
         compyCardThree = new Button("Card\nThree");
-        compyCardThree.setId("card");
-        compyCardThree.setMinWidth(104);
-        compyCardThree.setMinHeight(150);
-        compyCardThree.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardThree, 2, 0);
 
         compyCardFour = new Button("Card\nFour");
-        compyCardFour.setId("card");
-        compyCardFour.setMinWidth(104);
-        compyCardFour.setMinHeight(150);
-        compyCardFour.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardFour, 3, 0);
 
         compyCardFive = new Button("Card\nFive");
-        compyCardFive.setId("card");
-        compyCardFive.setMinWidth(104);
-        compyCardFive.setMinHeight(150);
-        compyCardFive.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyCardFive, 4, 0);
 
+        // Add compyButtons to List and set shared attributes
+        compyButtons.add(compyCardOne);
+        compyButtons.add(compyCardTwo);
+        compyButtons.add(compyCardThree);
+        compyButtons.add(compyCardFour);
+        compyButtons.add(compyCardFive);
+
+        for (Button button : compyButtons){
+            button.setId("card");
+            button.setMinWidth(104);
+            button.setMinHeight(150);
+            button.setTextAlignment(TextAlignment.CENTER);
+        }
+
+        // Initialise pack buttons
         packLabel = new Button("Cards:\n40");
-        packLabel.setId("card");
-        packLabel.setMinWidth(104);
-        packLabel.setMinHeight(150);
-        packLabel.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(packLabel, 0, 1);
 
         cardPileLabel = new Button("Ace\nSpades");
-        cardPileLabel.setId("card");
-        cardPileLabel.setMinWidth(104);
-        cardPileLabel.setMinHeight(150);
-        cardPileLabel.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(cardPileLabel, 1, 1);
 
+        // Add packButtons to List and set shared attributes
+        List<Button> packButtons = new ArrayList<>();
+        packButtons.add(packLabel);
+        packButtons.add(cardPileLabel);
+
+        for (Button button : packButtons){
+            button.setId("card");
+            button.setMinWidth(104);
+            button.setMinHeight(150);
+            button.setTextAlignment(TextAlignment.CENTER);
+        }
+
+        // Initialise player buttons
         playerCardOne = new Button("Card\nOne");
-        playerCardOne.setId("card");
-        playerCardOne.setMinWidth(104);
-        playerCardOne.setMinHeight(150);
-        playerCardOne.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardOne, 0, 2);
 
         playerCardTwo = new Button("Card\nTwo");
-        playerCardTwo.setId("card");
-        playerCardTwo.setMinWidth(104);
-        playerCardTwo.setMinHeight(150);
-        playerCardTwo.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardTwo, 1, 2);
 
         playerCardThree = new Button("Card\nThree");
-        playerCardThree.setId("card");
-        playerCardThree.setMinWidth(104);
-        playerCardThree.setMinHeight(150);
-        playerCardThree.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardThree, 2, 2);
-        GridPane.setHalignment(playerCardThree, HPos.CENTER);
         
         playerCardFour = new Button("Card\nFour");
-        playerCardFour.setId("card");
-        playerCardFour.setMinWidth(104);
-        playerCardFour.setMinHeight(150);
-        playerCardFour.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardFour, 3, 2);
         
         playerCardFive = new Button("Card\nFive");
-        playerCardFive.setId("card");
-        playerCardFive.setMinWidth(104);
-        playerCardFive.setMinHeight(150);
-        playerCardFive.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerCardFive, 4, 2);
 
+        // Add playerButtons to List and set shared attributes
+        playerButtons.add(playerCardOne);
+        playerButtons.add(playerCardTwo);
+        playerButtons.add(playerCardThree);
+        playerButtons.add(playerCardFour);
+        playerButtons.add(playerCardFive);
+
+        for (Button button : playerButtons){
+            button.setId("card");
+            button.setMinWidth(104);
+            button.setMinHeight(150);
+            button.setTextAlignment(TextAlignment.CENTER);
+        }
+
+        // Initialise new game and score buttons, and labels
         newGameButton = new Button("New Game");
-        newGameButton.setId("newgame");
-        newGameButton.setMinWidth(100);
-        newGameButton.setTextAlignment(TextAlignment.CENTER);
-        newGameButton.setId("scorelabel");
         GridPane.setConstraints(newGameButton, 0, 0);
 
         playerTotalPoints = new Button("0");
-        playerTotalPoints.setId("scorelabel");
-        playerTotalPoints.setMinWidth(100);
-        playerTotalPoints.setTextAlignment(TextAlignment.CENTER);
-        playerTotalPoints.setAlignment(Pos.BASELINE_CENTER);
         GridPane.setConstraints(playerTotalPoints, 0, 1);
 
         Label playerTotalLabel = new Label("Player Total");
@@ -200,9 +192,6 @@ public class App extends Application {
         GridPane.setConstraints(playerTotalLabel, 1, 1);
 
         playerPointsScored = new Button("0");
-        playerPointsScored.setId("scorelabel");
-        playerPointsScored.setMinWidth(100);
-        playerPointsScored.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(playerPointsScored, 0, 2);
 
         Label playerLastPointsLabel = new Label("Last Points Scored");
@@ -218,9 +207,6 @@ public class App extends Application {
         GridPane.setConstraints(compyTotalLabel, 0, 0);
 
         compyTotalPoints = new Button("0");
-        compyTotalPoints.setId("scorelabel");
-        compyTotalPoints.setMinWidth(100);
-        compyTotalPoints.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyTotalPoints, 1, 0);
 
         Label compyLastPointsLabel = new Label("Last Points Scored");
@@ -229,10 +215,20 @@ public class App extends Application {
         GridPane.setConstraints(compyLastPointsLabel, 0, 1);
 
         compyPointsScored = new Button("0");
-        compyPointsScored.setId("scorelabel");
-        compyPointsScored.setMinWidth(100);
-        compyPointsScored.setTextAlignment(TextAlignment.CENTER);
         GridPane.setConstraints(compyPointsScored, 1, 1);
+
+        // Add scoreButtons to List and set shared attributes
+        scoreButtons.add(newGameButton);
+        scoreButtons.add(playerTotalPoints);
+        scoreButtons.add(playerPointsScored);
+        scoreButtons.add(compyTotalPoints);
+        scoreButtons.add(compyPointsScored);
+
+        for (Button button : scoreButtons){
+            button.setId("scorelabel");
+            button.setMinWidth(100);
+            button.setTextAlignment(TextAlignment.CENTER);
+        }
 
         gridTop.getChildren().addAll(compyCardOne, compyCardTwo, compyCardThree, compyCardFour,
         compyCardFive);
@@ -264,10 +260,10 @@ public class App extends Application {
             setCardInPlay();
             setPlayerHand();          
             showTotalPoints();
+            disableCards(true);
             playerPointsScored.setText("" + cardScore);
             playPlayerCardSound();
             delay(1500, () -> playCompyCard());
-            
         });
 
         playerCardTwo.setOnAction(e -> {
@@ -275,6 +271,7 @@ public class App extends Application {
             setCardInPlay();
             setPlayerHand();
             showTotalPoints();
+            disableCards(true);
             playerPointsScored.setText("" + cardScore);
             playPlayerCardSound();
             delay(1500, () -> playCompyCard());
@@ -285,6 +282,7 @@ public class App extends Application {
             setCardInPlay();
             setPlayerHand();
             showTotalPoints();
+            disableCards(true);
             playerPointsScored.setText("" + cardScore);
             playPlayerCardSound();
             delay(1500, () -> playCompyCard());
@@ -295,6 +293,7 @@ public class App extends Application {
             setCardInPlay();
             setPlayerHand();
             showTotalPoints();
+            disableCards(true);
             playerPointsScored.setText("" + cardScore);
             playPlayerCardSound();
             delay(1500, () -> playCompyCard());
@@ -305,6 +304,7 @@ public class App extends Application {
             setCardInPlay();
             setPlayerHand();
             showTotalPoints();
+            disableCards(true);
             playerPointsScored.setText("" + cardScore);
             playPlayerCardSound();
             delay(1500, () -> playCompyCard());
@@ -363,11 +363,12 @@ public class App extends Application {
     public void setPlayerHand(){
         List<Card> hand = new ArrayList<>();
         hand = game.getCurrentPlayerHand();
-        playerCardOne.setText("" + hand.get(0));
-        playerCardTwo.setText("" + hand.get(1));
-        playerCardThree.setText("" + hand.get(2));
-        playerCardFour.setText("" + hand.get(3));
-        playerCardFive.setText("" + hand.get(4));
+        
+        int index = 0;
+        for (Button button : playerButtons){
+            button.setText("" + hand.get(index));
+            index++;
+        }
         colourCard();
     }
 
@@ -376,6 +377,7 @@ public class App extends Application {
         showTotalPoints();
         compyPointsScored.setText("" + cardScore);
         setCardInPlay();
+        disableCards(false);
         setRemainingCards();
         colourCard();
         playCompyCardSound();
@@ -383,11 +385,9 @@ public class App extends Application {
     }
 
     public void disableCards(boolean toggle){
-        playerCardOne.setDisable(toggle);
-        playerCardTwo.setDisable(toggle);
-        playerCardThree.setDisable(toggle);
-        playerCardFour.setDisable(toggle);
-        playerCardFive.setDisable(toggle);
+        for (Button button : playerButtons){
+            button.setDisable(toggle);
+        }
     }
 
     public void gameOver(){
@@ -407,43 +407,25 @@ public class App extends Application {
     }
 
     public void resetScores(){
-    compyPointsScored.setText("0");
-    compyTotalPoints.setText("0");
-    playerPointsScored.setText("0");
-    playerTotalPoints.setText("0");
+        for (Button button : scoreButtons){
+            if (button != newGameButton){
+                button.setText("0");
+            }
+        }
     }
 
     public void colourCard(){
         List<Card> hand = game.getCurrentPlayerHand();
-        if (hand.get(0).getCardType() == Card.CardType.HEARTS | hand.get(0).getCardType() == Card.CardType.DIAMONDS){
-                playerCardOne.setStyle("-fx-text-fill: red");
-            } else {
-                playerCardOne.setStyle("-fx-text-fill: black");
-            }
+        int index = 0;
 
-        if (hand.get(1).getCardType() == Card.CardType.HEARTS | hand.get(1).getCardType() == Card.CardType.DIAMONDS){
-                playerCardTwo.setStyle("-fx-text-fill: red");
+        for (Button button : playerButtons){
+            if (hand.get(index).getCardType() == Card.CardType.HEARTS | hand.get(index).getCardType() == Card.CardType.DIAMONDS){
+                button.setStyle("-fx-text-fill: red");
             } else {
-                playerCardTwo.setStyle("-fx-text-fill: black");
+                button.setStyle("-fx-text-fill: black");
             }
-
-        if (hand.get(2).getCardType() == Card.CardType.HEARTS | hand.get(2).getCardType() == Card.CardType.DIAMONDS){
-                playerCardThree.setStyle("-fx-text-fill: red");
-            } else {
-                playerCardThree.setStyle("-fx-text-fill: black");
-            }
-
-        if (hand.get(3).getCardType() == Card.CardType.HEARTS | hand.get(3).getCardType() == Card.CardType.DIAMONDS){
-                playerCardFour.setStyle("-fx-text-fill: red");
-            } else {
-                playerCardFour.setStyle("-fx-text-fill: black");
-            }
-
-        if (hand.get(4).getCardType() == Card.CardType.HEARTS | hand.get(4).getCardType() == Card.CardType.DIAMONDS){
-                playerCardFive.setStyle("-fx-text-fill: red");
-            } else {
-                playerCardFive.setStyle("-fx-text-fill: black");
-            }
+            index++;
+        }
 
         if (game.getCardInPlay().getCardType() == Card.CardType.HEARTS | game.getCardInPlay().getCardType() == Card.CardType.DIAMONDS){
                 cardPileLabel.setStyle("-fx-text-fill: red");
@@ -454,35 +436,16 @@ public class App extends Application {
 
     public void colourCompyCard(){
         List<Card> hand = game.getCurrentCompyHand();
-        if (hand.get(0).getCardType() == Card.CardType.HEARTS | hand.get(0).getCardType() == Card.CardType.DIAMONDS){
-                compyCardOne.setStyle("-fx-text-fill: red");
-            } else {
-                compyCardOne.setStyle("-fx-text-fill: black");
-            }
+        int index = 0;
 
-        if (hand.get(1).getCardType() == Card.CardType.HEARTS | hand.get(1).getCardType() == Card.CardType.DIAMONDS){
-                compyCardTwo.setStyle("-fx-text-fill: red");
+        for (Button button : compyButtons){
+            if (hand.get(index).getCardType() == Card.CardType.HEARTS | hand.get(index).getCardType() == Card.CardType.DIAMONDS){
+                button.setStyle("-fx-text-fill: red");
             } else {
-                compyCardTwo.setStyle("-fx-text-fill: black");
+                button.setStyle("-fx-text-fill: black");
             }
-
-        if (hand.get(2).getCardType() == Card.CardType.HEARTS | hand.get(2).getCardType() == Card.CardType.DIAMONDS){
-                compyCardThree.setStyle("-fx-text-fill: red");
-            } else {
-                compyCardThree.setStyle("-fx-text-fill: black");
-            }
-
-        if (hand.get(3).getCardType() == Card.CardType.HEARTS | hand.get(3).getCardType() == Card.CardType.DIAMONDS){
-                compyCardFour.setStyle("-fx-text-fill: red");
-            } else {
-                compyCardFour.setStyle("-fx-text-fill: black");
-            }
-
-        if (hand.get(4).getCardType() == Card.CardType.HEARTS | hand.get(4).getCardType() == Card.CardType.DIAMONDS){
-                compyCardFive.setStyle("-fx-text-fill: red");
-            } else {
-                compyCardFive.setStyle("-fx-text-fill: black");
-            }
+            index++;
+        }
     }
 
     // Delay Method
