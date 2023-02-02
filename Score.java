@@ -2,12 +2,23 @@ public class Score {
     private int playerScore;
     private int compyScore;
 
+    // private static final Score score = new Score();
+    // Singleton synchronized
+    private static volatile Score score = null;
+    private static final Object singleHolding = new Object();
+
     private Score(){}
 
-    private static final Score score = new Score();
-
-    public static Score getScoreInstance(){
-        return score;
+    public static synchronized Score getScoreInstance(){
+        if (score != null){
+            return score;
+        }
+        synchronized (singleHolding){
+            if (score == null){
+                score = new Score();
+            }
+            return score;
+        }
     }
 
     public void setPlayerScore(int score){

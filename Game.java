@@ -14,8 +14,11 @@ public class Game {
     private int lastPlayerScore;
     private int lastCompyScore;
 
-    Score score = Score.getScoreInstance();
+    // Score score = Score.getScoreInstance(); - scynchronized version
 
+    // Thread-safe enum version
+    ScoreSingleton score = ScoreSingleton.INSTANCE;
+    
     public void getNewDeck(){
         deck = Card.getPack();
     }
