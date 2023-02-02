@@ -8,5 +8,7 @@ Rules:
 Features and patch notes:
 - Javafx and sound
 - Exploring data structures
+- Thread-safe Singleton
+- Concurrency
 - Simple game theory
 - Opponent A.I.
