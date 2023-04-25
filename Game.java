@@ -45,9 +45,9 @@ public class Game {
     }
 
     public void getNewCard(String whoIsPlaying){
-        if (whoIsPlaying == "Player" && deck.size() > 0){
+        if (whoIsPlaying.equals("Player") && deck.size() > 0){
             playerHand.add(deck.removeLast());
-        } else if (whoIsPlaying == "Compy" && deck.size() > 0){
+        } else if (whoIsPlaying.equals("Compy") && deck.size() > 0){
             compyHand.add(deck.removeLast());
         }
     }
